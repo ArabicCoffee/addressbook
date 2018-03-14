@@ -16,7 +16,8 @@ public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private ObservableList<Departmens> departmens = FXCollections.observableArrayList();
-    private ObservableList<Departmens.Person> contacts = FXCollections.observableArrayList();
+    //private ObservableList<Departmens.Person> contacts = FXCollections.observableArrayList();
+
 
     //initialize left tableview
     public MainApp() {
@@ -32,18 +33,18 @@ public class MainApp extends Application {
         departmens.add(new Departmens("Отдел № 10"));
 
         //initialize right tableview
+        /*contacts.add(new Departmens().new Person());
         contacts.add(new Departmens().new Person());
-        contacts.add(new Departmens().new Person());
-        contacts.add(new Departmens().new Person());
+        contacts.add(new Departmens().new Person());*/
     }
 
     public ObservableList<Departmens> getDepartmens() {
         return departmens;
     }
 
-    public ObservableList<Departmens.Person> getContacts() {
+    /*public ObservableList<Departmens.Person> getContacts() {
         return contacts;
-    }
+    }*/
 
 
     @Override

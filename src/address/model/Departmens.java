@@ -4,6 +4,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 
@@ -11,7 +13,12 @@ public class Departmens {
 
     private final StringProperty nameDepartment;
     private  Person [] contacts;
+    private ObservableList<Departmens.Person> contactList = FXCollections.observableArrayList();
 
+
+    public ObservableList<Departmens.Person> getContactList() {
+        return contactList;
+    }
 
     public Departmens() {
         this(null);
@@ -19,6 +26,10 @@ public class Departmens {
 
     public Departmens(String nameDepartment) {
         this.nameDepartment = new SimpleStringProperty(nameDepartment);
+        contactList.add(new Person());
+        contactList.add(new Person());
+        contactList.add(new Person());
+        contactList.add(new Person());
         //this.contacts = new Person[]{new Person()};
     }
 

@@ -4,11 +4,10 @@ import address.MainApp;
 import address.model.Departmens;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.time.LocalDate;
 
@@ -39,6 +38,7 @@ public class PersonOverview {
 
     public PersonOverview() {
 
+
     }
 
     @FXML
@@ -54,38 +54,40 @@ public class PersonOverview {
         tableViewDepartmens.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Departmens>() {
             @Override
             public void changed(ObservableValue<? extends Departmens> observable, Departmens oldValue, Departmens newValue) {
+
                 showContacts(newValue);
 
             }
         });
-
     }
 
     public void showContacts(Departmens departmens) {
         if (departmens != null) {
             labelNameDepartment.setText(departmens.getNameDepartment());
-
-            //FIO.setCellValueFactory();
-            //FIO.setCellValueFactory(cellData -> cellData.getValue().FIOProperty());
-            /*position.setCellValueFactory(cellData -> cellData.getValue().positionProperty());
-            birthday.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-            phone.setCellValueFactory(cellData -> cellData.getValue().phoneProperty());
-            mobilePhone.setCellValueFactory(cellData -> cellData.getValue().mobilePhoneProperty());
-            tableViewContacts.setItems(mainApp.getContacts());*/
-
-            //birthday.(DateUtil.format(person.getBirthday()));
+            tableViewContacts.setItems(departmens.getContactList());
         }
     }
 
     public void handleDeletePerson() {
         int selectedIndex = tableViewContacts.getSelectionModel().getSelectedIndex();
-        tableViewContacts.getItems().remove(selectedIndex);
+        if (selectedIndex >= 0) {
+            tableViewContacts.getItems().remove(selectedIndex);
+        } else {
+            // Ничего не выбрано.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Не выбран контакт");
+            alert.setContentText("Пожалуйста выберите контакт в таблице для удаления.");
+            alert.showAndWait();
+        }
     }
+
+
+
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-
         tableViewDepartmens.setItems(mainApp.getDepartmens());
-        tableViewContacts.setItems(mainApp.getContacts());
     }
 }
