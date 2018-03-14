@@ -54,9 +54,7 @@ public class PersonOverview {
         tableViewDepartmens.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Departmens>() {
             @Override
             public void changed(ObservableValue<? extends Departmens> observable, Departmens oldValue, Departmens newValue) {
-
                 showContacts(newValue);
-
             }
         });
     }
@@ -83,7 +81,49 @@ public class PersonOverview {
         }
     }
 
+    public void handleDeleteDepartment() {
+        int selectedIndex = tableViewDepartmens.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            tableViewDepartmens.getItems().remove(selectedIndex);
+        } else {
+            // Ничего не выбрано.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Не выбран отдел");
+            alert.setContentText("Пожалуйста выберите отдел в таблице для удаления.");
+            alert.showAndWait();
+        }
+    }
 
+    @FXML
+    private void handleNewDepartment() throws Exception {
+        Departmens tempDepartment = new Departmens();
+        boolean okClicked = mainApp.showDepartmentEditDialog(tempDepartment);
+        if (okClicked) {
+            mainApp.getDepartmens().add(tempDepartment);
+        }
+    }
+
+    @FXML
+    private void handleEditDepartment() throws Exception {
+        Departmens selectedDepartment = tableViewDepartmens.getSelectionModel().getSelectedItem();
+        if (selectedDepartment != null) {
+            boolean okClicked = mainApp.showDepartmentEditDialog(selectedDepartment);
+            if (okClicked) {
+                showContacts(selectedDepartment);
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(mainApp.getPrimaryStage());
+                alert.setTitle("Ошибка");
+                alert.setHeaderText("Не выбран отдел");
+                alert.setContentText("Пожалуйста, выберите отдел из списка.");
+
+                alert.showAndWait();
+            }
+        }
+    }
 
 
     public void setMainApp(MainApp mainApp) {
