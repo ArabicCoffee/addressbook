@@ -46,7 +46,7 @@ public class Departmens {
         private final StringProperty mobilePhone;
 
         public Person() {
-            this.FIO = new SimpleStringProperty("Томачинский");
+            this.FIO = new SimpleStringProperty("Human");
             this.position = new SimpleStringProperty("Boss");
             Date = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
             this.phone = new SimpleStringProperty("777");

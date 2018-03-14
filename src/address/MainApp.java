@@ -18,6 +18,7 @@ public class MainApp extends Application {
     private ObservableList<Departmens> departmens = FXCollections.observableArrayList();
     private ObservableList<Departmens.Person> contacts = FXCollections.observableArrayList();
 
+    //initialize left tableview
     public MainApp() {
         departmens.add(new Departmens("Отдел № 1"));
         departmens.add(new Departmens("Отдел № 2"));
@@ -30,6 +31,7 @@ public class MainApp extends Application {
         departmens.add(new Departmens("Отдел № 9"));
         departmens.add(new Departmens("Отдел № 10"));
 
+        //initialize right tableview
         contacts.add(new Departmens().new Person());
         contacts.add(new Departmens().new Person());
         contacts.add(new Departmens().new Person());
@@ -42,6 +44,7 @@ public class MainApp extends Application {
     public ObservableList<Departmens.Person> getContacts() {
         return contacts;
     }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
