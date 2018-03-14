@@ -2,6 +2,7 @@ package address;
 
 import address.model.Departmens;
 import address.view.DepartmentEditDialog;
+import address.view.PersonEditDialog;
 import address.view.PersonOverview;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -78,7 +79,7 @@ public class MainApp extends Application {
         controller.setMainApp(this);
     }
 
-public boolean showDepartmentEditDialog(Departmens departmens) throws Exception {
+    public boolean showDepartmentEditDialog(Departmens departmens) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("view/DepartmentEditDialog.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
@@ -90,21 +91,42 @@ public boolean showDepartmentEditDialog(Departmens departmens) throws Exception 
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
 
-    DepartmentEditDialog controller = loader.getController();
-    controller.setDialogStage(dialogStage);
-    controller.setDepartment(departmens);
+        DepartmentEditDialog controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setDepartment(departmens);
 
-    dialogStage.showAndWait();
+        dialogStage.showAndWait();
 
-    return controller.isOkClicked();
-}
+        return controller.isOkClicked();
+    }
+
+    public boolean showPersonEditDialog(Departmens.Person person) throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("view/PersonEditDialog.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Редактирование контакта");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+
+        PersonEditDialog controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setPerson(person);
+
+        dialogStage.showAndWait();
+
+        return controller.isOkClicked();
+    }
 
 
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
-    public static void main(String [] args) {
+    public static void main(String[] args) {
         launch(args);
     }
 }

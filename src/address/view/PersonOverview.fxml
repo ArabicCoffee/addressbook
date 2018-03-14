@@ -51,8 +51,8 @@
                   </TableView>
                   <ButtonBar layoutX="37.0" layoutY="358.0" prefHeight="40.0" prefWidth="264.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0">
                     <buttons>
-                      <Button mnemonicParsing="false" text="Добавить" />
-                        <Button mnemonicParsing="false" text="Изменить" />
+                      <Button mnemonicParsing="false" onAction="#handleNewPerson" text="Добавить" />
+                        <Button mnemonicParsing="false" onAction="#handleEditPerson" text="Изменить" />
                         <Button mnemonicParsing="false" onAction="#handleDeletePerson" text="Удалить" />
                     </buttons>
                      <padding>

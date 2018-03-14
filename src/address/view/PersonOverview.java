@@ -113,15 +113,45 @@ public class PersonOverview {
             if (okClicked) {
                 showContacts(selectedDepartment);
             }
-            else {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.initOwner(mainApp.getPrimaryStage());
-                alert.setTitle("Ошибка");
-                alert.setHeaderText("Не выбран отдел");
-                alert.setContentText("Пожалуйста, выберите отдел из списка.");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Не выбран отдел");
+            alert.setContentText("Пожалуйста, выберите отдел из списка.");
 
-                alert.showAndWait();
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void handleNewPerson() throws Exception{
+        Departmens.Person tempPerson = new Departmens().new Person();
+        boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
+        if (okClicked) {
+            Departmens selectedPerson = tableViewDepartmens.getSelectionModel().getSelectedItem();
+            selectedPerson.getContactList().add(tempPerson);
+        }
+    }
+
+    @FXML
+    private void handleEditPerson() throws Exception {
+        Departmens.Person selectedPerson = tableViewContacts.getSelectionModel().getSelectedItem();
+        if (selectedPerson != null) {
+            boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
+            if (okClicked) {
+                Departmens selectedPerson2 = tableViewDepartmens.getSelectionModel().getSelectedItem();
+                showContacts(selectedPerson2);
             }
+        } else {
+            // Ничего не выбрано.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Не выбран контакт");
+            alert.setContentText("Пожалуйста выберите контакт для редактирования.");
+
+            alert.showAndWait();
         }
     }
 
