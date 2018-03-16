@@ -16,6 +16,10 @@ public class Departmens {
     private ObservableList<Departmens.Person> contactList = FXCollections.observableArrayList();
 
 
+    public void setContactList(ObservableList<Departmens.Person> contactList) {
+        this.contactList = contactList;
+    }
+
     public ObservableList<Departmens.Person> getContactList() {
         return contactList;
     }
