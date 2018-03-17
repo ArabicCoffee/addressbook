@@ -33,17 +33,57 @@ public class PersonOverview {
     private TableColumn<Departmens.Person, String> phone;
     @FXML
     private TableColumn<Departmens.Person, String> mobilePhone;
+    @FXML
+    private ButtonBar buttonBarContacts;
+    @FXML
+    private Label labelBirthday;
+    @FXML
+    private Label labelHolidays;
+    @FXML
+    private Label choices;
+
+    @FXML
+    private TableView<Departmens.Person> tableViewBirthday;
+    @FXML
+    private TableColumn<Departmens.Person, String> FIOb;
+    @FXML
+    private TableColumn<Departmens.Person, String> positionb;
+    @FXML
+    private TableColumn<Departmens.Person, LocalDate> birthdayb;
+    @FXML
+    private TableColumn<Departmens.Person, String> phoneb;
+    @FXML
+    private TableColumn<Departmens.Person, String> mobilePhoneb;
+    @FXML
+    private TableView<Departmens> tableViewHolidays;
+    @FXML
+    private TableColumn<Departmens, String> nameHoliday;
+    @FXML
+    private TableColumn<Departmens, String> dateHoliday;
+    @FXML
+    private TableView<Departmens.Person> tableViewChoices;
+    @FXML
+    private TableColumn<Departmens.Person, String> FIOc;
+    @FXML
+    private TableColumn<Departmens.Person, String> positionc;
+    @FXML
+    private TableColumn<Departmens.Person, LocalDate> birthdayc;
+    @FXML
+    private TableColumn<Departmens.Person, String> phonec;
+    @FXML
+    private TableColumn<Departmens.Person, String> mobilePhonec;
+
+
 
     private MainApp mainApp;
 
     public PersonOverview() {
-
-
     }
 
     @FXML
     private void initialize() {
         textFieldSearch.setPromptText("Поиск");
+        visibleMain();
         nameDepartmentColumn.setCellValueFactory(cellData -> cellData.getValue().nameDepartmentProperty());
         FIO.setCellValueFactory(cellData -> cellData.getValue().FIOProperty());
         position.setCellValueFactory(cellData -> cellData.getValue().positionProperty());
@@ -59,8 +99,43 @@ public class PersonOverview {
         });
     }
 
+    @FXML
+    private void handleMainPage() {
+        visibleMain();
+    }
+
+
+
+    public void visibleMain() {
+
+        labelNameDepartment.setVisible(false);
+        tableViewContacts.setVisible(false);
+        buttonBarContacts.setVisible(false);
+
+        labelBirthday.setVisible(true);
+        tableViewBirthday.setVisible(true);
+        labelHolidays.setVisible(true);
+        tableViewHolidays.setVisible(true);
+        choices.setVisible(true);
+        tableViewChoices.setVisible(true);
+    }
+
+    public void visiblePerson() {
+        labelNameDepartment.setVisible(true);
+        tableViewContacts.setVisible(true);
+        buttonBarContacts.setVisible(true);
+
+        labelBirthday.setVisible(false);
+        tableViewBirthday.setVisible(false);
+        labelHolidays.setVisible(false);
+        tableViewHolidays.setVisible(false);
+        choices.setVisible(false);
+        tableViewChoices.setVisible(false);
+    }
+
     public void showContacts(Departmens departmens) {
         if (departmens != null) {
+            visiblePerson();
             labelNameDepartment.setText(departmens.getNameDepartment());
             tableViewContacts.setItems(departmens.getContactList());
         }

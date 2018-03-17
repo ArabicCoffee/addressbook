@@ -80,6 +80,7 @@ public class MainApp extends Application {
         controller.setMainApp(this);
 
 
+
         primaryStage.show();
 
         File file = getPersonFilePath();

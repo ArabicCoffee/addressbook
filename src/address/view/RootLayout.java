@@ -21,6 +21,7 @@ public class RootLayout {
     // Reference to the main application
     private MainApp mainApp;
 
+
     /**
      * Is called by the main application to give a reference back to itself.
      *
@@ -29,6 +30,11 @@ public class RootLayout {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
+
+
+
+
+
 
     /**
      * Creates an empty address book.
