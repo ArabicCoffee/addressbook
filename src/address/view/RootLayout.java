@@ -1,13 +1,24 @@
 package address.view;
 
+import java.io.File;
+
 import address.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 
-import java.io.File;
 
+
+/**
+ * The controller for the root layout. The root layout provides the basic
+ * application layout containing a menu bar and space where other JavaFX
+ * elements can be placed.
+ *
+ * @author Marco Jakob
+ */
 public class RootLayout {
+
+    // Reference to the main application
     private MainApp mainApp;
 
     /**
@@ -40,7 +51,7 @@ public class RootLayout {
                 "XML files (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extFilter);
 
-        // Show open file dialog
+        // Show save file dialog
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
 
         if (file != null) {
@@ -92,9 +103,9 @@ public class RootLayout {
     @FXML
     private void handleAbout() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("AddressApp");
-        alert.setHeaderText("About");
-        alert.setContentText("Author: Marco Jakob\nWebsite: http://code.makery.ch");
+        alert.setTitle("Телефонный справочник");
+        alert.setHeaderText("О программе");
+        alert.setContentText("Автора: Томачинский Артем Олегович");
 
         alert.showAndWait();
     }

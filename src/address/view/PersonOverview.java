@@ -126,7 +126,7 @@ public class PersonOverview {
 
     @FXML
     private void handleNewPerson() throws Exception{
-        Departmens.Person tempPerson = new Departmens().new Person();
+        Departmens.Person tempPerson = new Departmens.Person();
         boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
         if (okClicked) {
             Departmens selectedPerson = tableViewDepartmens.getSelectionModel().getSelectedItem();

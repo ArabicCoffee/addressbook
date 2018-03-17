@@ -1,5 +1,6 @@
 package address.model;
 
+import address.util.LocalDateAdapter;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -7,6 +8,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
 public class Departmens {
@@ -53,7 +55,7 @@ public class Departmens {
         return contacts;
     }
 
-    public class Person {
+    public static class Person {
         private final StringProperty FIO;
         private final StringProperty position;
         private final ObjectProperty<LocalDate> Date;
@@ -92,6 +94,7 @@ public class Departmens {
             this.position.set(position);
         }
 
+        @XmlJavaTypeAdapter(LocalDateAdapter.class)
         public LocalDate getDate() {
             return Date.get();
         }

@@ -86,6 +86,7 @@ public class MainApp extends Application {
         if (file != null) {
             loadPersonDataFromFile(file);
         }
+
     }
 
     public void showPersonOverview() throws Exception {
@@ -146,6 +147,7 @@ public class MainApp extends Application {
     }
 
     public File getPersonFilePath() {
+
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         String filePath = prefs.get("filePath", null);
         if (filePath != null) {
@@ -155,18 +157,27 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Sets the file path of the currently loaded file. The path is persisted in
+     * the OS specific registry.
+     *
+     * @param file
+     *            the file or null to remove the path
+     */
     public void setPersonFilePath(File file) {
+        Preferences p = Preferences.userRoot();
+        Preferences p2 = Preferences.systemNodeForPackage(MainApp.class);
         Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
         if (file != null) {
             prefs.put("filePath", file.getPath());
 
-            // Обновление заглавия сцены.
-            primaryStage.setTitle("AddressApp - " + file.getName());
+            // Update the stage title.
+            primaryStage.setTitle("Телефонный справочник - " + file.getName());
         } else {
             prefs.remove("filePath");
 
-            // Обновление заглавия сцены.
-            primaryStage.setTitle("AddressApp");
+            // Update the stage title.
+            primaryStage.setTitle("Телефонный справочник");
         }
     }
 
@@ -180,18 +191,19 @@ public class MainApp extends Application {
             PersonListWrapper wrapper = (PersonListWrapper) um.unmarshal(file);
 
             departmens.clear();
-            departmens.addAll(wrapper.getDepartmens());
+            departmens.addAll(wrapper.getPersons());
 
             // Save the file path to the registry.
             setPersonFilePath(file);
 
         } catch (Exception e) { // catches ANY exception
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not load data");
-            alert.setContentText("Could not load data from file:\n" + file.getPath());
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Ошибка загрузки данных");
+            alert.setContentText("Невозможно загрузить данные из БД:\n" + file.getPath());
 
             alert.showAndWait();
+            e.printStackTrace();
         }
     }
 
@@ -202,14 +214,13 @@ public class MainApp extends Application {
      */
     public void savePersonDataToFile(File file) {
         try {
-            JAXBContext context = JAXBContext
-                    .newInstance(PersonListWrapper.class);
+            JAXBContext context = JAXBContext.newInstance(PersonListWrapper.class);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
             // Wrapping our person data.
             PersonListWrapper wrapper = new PersonListWrapper();
-            wrapper.setDepartmens(departmens);
+            wrapper.setPersons(departmens);
 
             // Marshalling and saving XML to the file.
             m.marshal(wrapper, file);
@@ -218,11 +229,12 @@ public class MainApp extends Application {
             setPersonFilePath(file);
         } catch (Exception e) { // catches ANY exception
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not save data");
-            alert.setContentText("Could not save data to file:\n" + file.getPath());
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Ошибка сохранения данных");
+            alert.setContentText("Невозможно сохранить данные в БД:\n" + file.getPath());
 
             alert.showAndWait();
+            e.printStackTrace();
         }
     }
 

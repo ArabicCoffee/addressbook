@@ -1,26 +1,27 @@
 package address.model;
 
-import address.MainApp;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
 
+/**
+ * Helper class to wrap a list of persons. This is used for saving the
+ * list of persons to XML.
+ *
+ * @author Marco Jakob
+ */
+@XmlRootElement(name = "persons")
+public class PersonListWrapper {
 
-@XmlRootElement(name = "Departments")
-    public class PersonListWrapper {
-    private List<Departmens> departmens;
-
-
-
-    @XmlElement(name = "department")
-    public List<Departmens> getDepartmens() {
-        return departmens;
+    private List <Departmens> persons;
+    //это необязательное имя, которое мы можем задать для элемента
+    @XmlElement(name = "person")
+    public List <Departmens> getPersons() {
+        return persons;
     }
-
-    public void setDepartmens(List<Departmens> persons) {
-        this.departmens = persons;
+    public void setPersons(List<Departmens> persons) {
+        this.persons = persons;
     }
-
 
 }
