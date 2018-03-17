@@ -31,6 +31,7 @@ public class MainApp extends Application {
     //private ObservableList<Departmens.Person> contacts = FXCollections.observableArrayList();
 
 
+
     //initialize left tableview
     public MainApp() {
         departmens.add(new Departmens("Отдел № 1"));
