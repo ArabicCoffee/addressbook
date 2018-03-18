@@ -28,7 +28,7 @@ public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private ObservableList<Departmens> departmens = FXCollections.observableArrayList();
-    //private ObservableList<Departmens.Person> contacts = FXCollections.observableArrayList();
+    private ObservableList<Departmens.Person> contacts = FXCollections.observableArrayList();
 
 
 
@@ -55,9 +55,9 @@ public class MainApp extends Application {
         return departmens;
     }
 
-    /*public ObservableList<Departmens.Person> getContacts() {
+    public ObservableList<Departmens.Person> getContacts() {
         return contacts;
-    }*/
+    }
 
 
     @Override
@@ -99,6 +99,7 @@ public class MainApp extends Application {
 
         PersonOverview controller = loader.getController();
         controller.setMainApp(this);
+        //contacts.addAll(controller.choiceInMain());
     }
 
     public boolean showDepartmentEditDialog(Departmens departmens) throws Exception {
@@ -194,6 +195,11 @@ public class MainApp extends Application {
 
             departmens.clear();
             departmens.addAll(wrapper.getPersons());
+            contacts.clear();
+            if (wrapper.getChoices() != null) {
+                contacts.addAll(wrapper.getChoices());
+            }
+
 
             // Save the file path to the registry.
             setPersonFilePath(file);
@@ -223,6 +229,10 @@ public class MainApp extends Application {
             // Wrapping our person data.
             PersonListWrapper wrapper = new PersonListWrapper();
             wrapper.setPersons(departmens);
+
+            if (contacts != null) {
+                wrapper.setChoices(contacts);
+            }
 
             // Marshalling and saving XML to the file.
             m.marshal(wrapper, file);

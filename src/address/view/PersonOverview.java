@@ -6,12 +6,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -84,6 +87,19 @@ public class PersonOverview {
 
     private ObservableList<Departmens.Person> tempListChoices = FXCollections.observableArrayList();
 
+    @FXML
+    private TableColumn<Departmens.Person, String> FIOs;
+    @FXML
+    private TableColumn<Departmens.Person, String> positions;
+    @FXML
+    private TableColumn<Departmens.Person, LocalDate> birthdays;
+    @FXML
+    private TableColumn<Departmens.Person, String> phones;
+    @FXML
+    private TableColumn<Departmens.Person, String> mobilePhones;
+    @FXML
+    private TableView<Departmens.Person> tableViewSearch;
+    private ObservableList<Departmens.Person> masterData = FXCollections.observableArrayList();
 
 
     private MainApp mainApp;
@@ -128,12 +144,54 @@ public class PersonOverview {
         phonec.setCellValueFactory(cellData -> cellData.getValue().phoneProperty());
         mobilePhonec.setCellValueFactory(cellData -> cellData.getValue().mobilePhoneProperty());
 
+
+
+
+
+        FIOs.setCellValueFactory(cellData -> cellData.getValue().FIOProperty());
+        positions.setCellValueFactory(cellData -> cellData.getValue().positionProperty());
+        birthdays.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        phones.setCellValueFactory(cellData -> cellData.getValue().phoneProperty());
+        mobilePhones.setCellValueFactory(cellData -> cellData.getValue().mobilePhoneProperty());
+
+        FilteredList<Departmens.Person> filteredData = new FilteredList<>(masterData, p -> true);
+
+        textFieldSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(person -> {
+                // If filter text is empty, display all persons.
+                visibleSearchTableView();
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (person.getFIO().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                }
+
+
+                /*for (int i = 0; i < person.getContactList().size(); i++) {
+                if (person.getContactList().get(i).getFIO().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } }*/
+                return false; // Does not match.
+            });
+        });
+
+        SortedList<Departmens.Person> sortedData = new SortedList<>(filteredData);
+        //sortedData.comparatorProperty().bind(tableViewSearch.comparatorProperty());
+        tableViewSearch.setItems(filteredData);
+
+
         tableViewDepartmens.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Departmens>() {
             @Override
             public void changed(ObservableValue<? extends Departmens> observable, Departmens oldValue, Departmens newValue) {
                 showContacts(newValue);
             }
         });
+
+        //textFieldSearch.
 
         /*tableViewContacts.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Departmens.Person>() {
             @Override
@@ -177,8 +235,17 @@ public class PersonOverview {
     @FXML
     private void handleAddToChoice() {
         int selectedIndex = tableViewContacts.getSelectionModel().getSelectedIndex();
-        tempListChoices.add(tableViewContacts.getItems().get(selectedIndex));
-        tableViewChoices.setItems(tempListChoices);
+        //tempListChoices.add(tableViewContacts.getItems().get(selectedIndex));
+        mainApp.getContacts().add(tableViewContacts.getItems().get(selectedIndex));
+        tableViewChoices.setItems(mainApp.getContacts());
+        //tableViewChoices.setItems(tempListChoices);
+        //temp.setTempListChoices(tempListChoices);
+        //mainApp.getContacts().add(tempListChoices);
+
+    }
+
+    public List<Departmens.Person> choiceInMain() {
+        return  tempListChoices;
     }
 
     @FXML
@@ -193,23 +260,36 @@ public class PersonOverview {
     }
 
 
-
-    public void visibleMain() {
-        tableViewChoices.setItems(tempListChoices);
+    public void visibleSearchTableView() {
         labelNameDepartment.setVisible(false);
         tableViewContacts.setVisible(false);
         buttonBarContacts.setVisible(false);
+        labelBirthday.setVisible(false);
+        tableViewBirthday.setVisible(false);
+        choices.setVisible(false);
+        tableViewChoices.setVisible(false);
+
+        tableViewSearch.setVisible(true);
+        tableViewSearch.toFront();
+
+    }
+
+    public void visibleMain() {
+        //tableViewChoices.setItems(tempListChoices);
+        labelNameDepartment.setVisible(false);
+        tableViewContacts.setVisible(false);
+        buttonBarContacts.setVisible(false);
+        tableViewSearch.setVisible(false);
 
         labelBirthday.setVisible(true);
         tableViewBirthday.setVisible(true);
-        labelHolidays.setVisible(true);
-        tableViewHolidays.setVisible(true);
+
         choices.setVisible(true);
         tableViewChoices.setVisible(true);
         labelBirthday.toFront();
         tableViewBirthday.toFront();
-        labelHolidays.toFront();
-        tableViewHolidays.toFront();
+
+
         choices.toFront();
         tableViewChoices.toFront();
     }
@@ -223,10 +303,9 @@ public class PersonOverview {
         buttonBarContacts.toFront();
         buttonMainLink.toFront();
 
+        tableViewSearch.setVisible(false);
         labelBirthday.setVisible(false);
         tableViewBirthday.setVisible(false);
-        labelHolidays.setVisible(false);
-        tableViewHolidays.setVisible(false);
         choices.setVisible(false);
         tableViewChoices.setVisible(false);
 
@@ -336,6 +415,13 @@ public class PersonOverview {
 
         setTempDepartamens();
         initTableviewBirthday();
-        //tableViewChoices.setItems(tempListChoices);
+        tableViewChoices.setItems(mainApp.getContacts());
+
+        for (int i = 0; i < mainApp.getDepartmens().size(); i++) {
+            for (int j = 0; j < mainApp.getDepartmens().get(i).getContactList().size(); j++) {
+                masterData.add(mainApp.getDepartmens().get(i).getContactList().get(j));
+            }
+        }
+        //masterData.addAll(mainApp.getDepartmens());
     }
 }

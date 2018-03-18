@@ -16,7 +16,19 @@ public class Departmens {
     private final StringProperty nameDepartment;
     private  Person [] contacts;
     private ObservableList<Departmens.Person> contactList = FXCollections.observableArrayList();
+    private ObservableList<Departmens.Person> tempListChoices = FXCollections.observableArrayList();
 
+    public void setContacts(Person[] contacts) {
+        this.contacts = contacts;
+    }
+
+    public ObservableList<Person> getTempListChoices() {
+        return tempListChoices;
+    }
+
+    public void setTempListChoices(ObservableList<Person> tempListChoices) {
+        this.tempListChoices = tempListChoices;
+    }
 
     public void setContactList(ObservableList<Departmens.Person> contactList) {
         this.contactList = contactList;
@@ -25,6 +37,9 @@ public class Departmens {
     public ObservableList<Departmens.Person> getContactList() {
         return contactList;
     }
+
+
+
 
     public Departmens() {
         this(null);
