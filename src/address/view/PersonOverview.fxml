@@ -47,6 +47,7 @@
                         <TableColumn fx:id="birthday" prefWidth="100.0" text="Дата Рождения" />
                         <TableColumn fx:id="phone" prefWidth="75.0" text="Телефон рабочий" />
                         <TableColumn fx:id="mobilePhone" prefWidth="75.0" text="Телефон мобильный" />
+                        <TableColumn fx:id="comments" prefWidth="75.0" text="Примечание" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -92,6 +93,7 @@
                               <TableColumn fx:id="birthdayb" prefWidth="75.0" text="Column X" />
                               <TableColumn fx:id="phoneb" prefWidth="75.0" text="Column X" />
                               <TableColumn fx:id="mobilePhoneb" prefWidth="75.0" text="Column X" />
+                              <TableColumn fx:id="commentsb" prefWidth="75.0" text="Column X" />
                           </columns>
                            <GridPane.margin>
                               <Insets top="5.0" />
@@ -107,6 +109,7 @@
                               <TableColumn fx:id="birthdayc" prefWidth="75.0" text="Column X" />
                               <TableColumn fx:id="phonec" prefWidth="75.0" text="Column X" />
                               <TableColumn fx:id="mobilePhonec" prefWidth="75.0" text="Column X" />
+                              <TableColumn fx:id="commentsc" prefWidth="75.0" text="Column X" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -126,6 +129,7 @@
                         <TableColumn fx:id="birthdays" prefWidth="75.0" text="Column X" />
                         <TableColumn fx:id="phones" prefWidth="75.0" text="Column X" />
                         <TableColumn fx:id="mobilePhones" prefWidth="75.0" text="Column X" />
+                        <TableColumn fx:id="commentss" prefWidth="75.0" text="Column X" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -47,10 +47,14 @@ public class Departmens {
 
     public Departmens(String nameDepartment) {
         this.nameDepartment = new SimpleStringProperty(nameDepartment);
+
+        for (int i = 0; i < 200; i++) {
+            contactList.add(new Person());
+        }
+        /*contactList.add(new Person());
         contactList.add(new Person());
         contactList.add(new Person());
-        contactList.add(new Person());
-        contactList.add(new Person());
+        contactList.add(new Person());*/
         //this.contacts = new Person[]{new Person()};
     }
 
@@ -76,6 +80,7 @@ public class Departmens {
         private final ObjectProperty<LocalDate> Date;
         private final StringProperty phone;
         private final StringProperty mobilePhone;
+        private final StringProperty comments;
 
         public Person() {
             this.FIO = new SimpleStringProperty("Human");
@@ -83,6 +88,19 @@ public class Departmens {
             Date = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
             this.phone = new SimpleStringProperty("777");
             this.mobilePhone = new SimpleStringProperty("89997776666");
+            this.comments = new SimpleStringProperty("");
+        }
+
+        public String getComments() {
+            return comments.get();
+        }
+
+        public StringProperty commentsProperty() {
+            return comments;
+        }
+
+        public void setComments(String comments) {
+            this.comments.set(comments);
         }
 
         public String getFIO() {

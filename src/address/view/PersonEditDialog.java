@@ -18,6 +18,8 @@ public class PersonEditDialog {
     private TextField textFieldPhone;
     @FXML
     private TextField textFieldMobilePhone;
+    @FXML
+    private TextField comments;
 
     private Stage dialogStage;
     private Departmens.Person person;
@@ -30,6 +32,7 @@ public class PersonEditDialog {
         textFieldBirthday.setPromptText("Пример: 1990-11-24");
         textFieldPhone.setPromptText("Пример: 777");
         textFieldMobilePhone.setPromptText("Пример: 8-981-456-77-77 или 89814567777");
+        comments.setPromptText("Пример: любой текст");
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -44,6 +47,7 @@ public class PersonEditDialog {
         textFieldBirthday.setText(DateUtil.format(person.getDate()));
         textFieldPhone.setText(person.getPhone());
         textFieldMobilePhone.setText(person.getMobilePhone());
+        comments.setText(person.getComments());
     }
 
     public boolean isOkClicked() {
@@ -58,6 +62,7 @@ public class PersonEditDialog {
             person.setDate(DateUtil.parse(textFieldBirthday.getText()));
             person.setPhone(textFieldPhone.getText());
             person.setMobilePhone(textFieldMobilePhone.getText());
+            person.setComments(comments.getText());
 
             okClicked = true;
             dialogStage.close();
@@ -75,22 +80,22 @@ public class PersonEditDialog {
         if (textFieldFIO.getText() == null || textFieldFIO.getText().length() == 0) {
             errorMessage += "Ошибка ввода ФИО!\n";
         }
-        if (textFieldPosition.getText() == null || textFieldPosition.getText().length() == 0) {
+        /*if (textFieldPosition.getText() == null || textFieldPosition.getText().length() == 0) {
             errorMessage += "Ошибка ввода Должности!\n";
-        }
-        if (textFieldBirthday.getText() == null || textFieldBirthday.getText().length() == 0) {
+        }*/
+        /*if (textFieldBirthday.getText() == null || textFieldBirthday.getText().length() == 0) {
             errorMessage += "Ошибка ввода Даты рождения!\n";
-        } else {
-            if (!DateUtil.validDate(textFieldBirthday.getText())) {
+        } else {*/
+            /*if (!DateUtil.validDate(textFieldBirthday.getText())) {
                 errorMessage += "Неправильный формат ввода Даты рождения. Используйте: ГГГГ-ММ-ДД";
-            }
-        }
-        if (textFieldPhone.getText() == null || textFieldPhone.getText().length() == 0) {
+            }*/
+        //}
+        /*if (textFieldPhone.getText() == null || textFieldPhone.getText().length() == 0) {
             errorMessage += "Ошибка ввода Телефона!\n";
         }
         if (textFieldMobilePhone.getText() == null || textFieldMobilePhone.getText().length() == 0) {
             errorMessage += "Ошибка ввода мобильно телефона!\n";
-        }
+        }*/
 
         if (errorMessage.length() == 0) {
             return true;

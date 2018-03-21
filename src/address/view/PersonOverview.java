@@ -10,6 +10,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -40,6 +44,8 @@ public class PersonOverview {
     @FXML
     private TableColumn<Departmens.Person, String> mobilePhone;
     @FXML
+    private TableColumn<Departmens.Person, String> comments;
+    @FXML
     private ButtonBar buttonBarContacts;
     @FXML
     private Label labelBirthday;
@@ -61,6 +67,8 @@ public class PersonOverview {
     @FXML
     private TableColumn<Departmens.Person, String> mobilePhoneb;
     @FXML
+    private TableColumn<Departmens.Person, String> commentsb;
+    @FXML
     private TableView<Departmens> tableViewHolidays;
     @FXML
     private TableColumn<Departmens, String> nameHoliday;
@@ -78,6 +86,8 @@ public class PersonOverview {
     private TableColumn<Departmens.Person, String> phonec;
     @FXML
     private TableColumn<Departmens.Person, String> mobilePhonec;
+    @FXML
+    private TableColumn<Departmens.Person, String> commentsc;
     @FXML
     private Button buttonMainLink;
 
@@ -98,9 +108,20 @@ public class PersonOverview {
     @FXML
     private TableColumn<Departmens.Person, String> mobilePhones;
     @FXML
+    private TableColumn<Departmens.Person, String> commentss;
+    @FXML
     private TableView<Departmens.Person> tableViewSearch;
+
+    @FXML
+    private TableColumn<Departmens, String> nameDepartmentColumnBirthday;
+    @FXML
+    private TableColumn<Departmens, String> nameDepartmentColumnChoice;
+    @FXML
+    private TableColumn<Departmens, String> nameDepartmentColumnSearch;
+
     private ObservableList<Departmens.Person> masterData = FXCollections.observableArrayList();
 
+    private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
 
     private MainApp mainApp;
 
@@ -121,12 +142,115 @@ public class PersonOverview {
         textFieldSearch.setPromptText("Поиск");
         visibleMain();
         //visiblePerson();
+
+        tableViewContacts.setRowFactory( tv -> {
+            TableRow<Departmens.Person> row = new TableRow<>();
+            row.setOnDragDetected(event -> {
+                        if (! row.isEmpty()) {
+                            Integer index = row.getIndex();
+                            Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
+                            db.setDragView(row.snapshot(null, null));
+                            ClipboardContent cc = new ClipboardContent();
+                            cc.put(SERIALIZED_MIME_TYPE, index);
+                            db.setContent(cc);
+                            event.consume();
+                        }
+            });
+
+            row.setOnDragOver(event -> {
+                Dragboard db = event.getDragboard();
+                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
+                    if (row.getIndex() != ((Integer)db.getContent(SERIALIZED_MIME_TYPE)).intValue()) {
+                        event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                        event.consume();
+                    }
+                }
+            });
+
+            row.setOnDragDropped(event -> {
+                Dragboard db = event.getDragboard();
+                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
+                    int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
+                    Departmens.Person draggedPerson = tableViewContacts.getItems().remove(draggedIndex);
+
+                    int dropIndex ;
+
+                    if (row.isEmpty()) {
+                        dropIndex = tableViewContacts.getItems().size() ;
+                    } else {
+                        dropIndex = row.getIndex();
+                    }
+
+                    tableViewContacts.getItems().add(dropIndex, draggedPerson);
+
+                    event.setDropCompleted(true);
+                    tableViewContacts.getSelectionModel().select(dropIndex);
+                    event.consume();
+                }
+            });
+
+            return row ;
+        });
+
+        tableViewDepartmens.setRowFactory( tv -> {
+            TableRow<Departmens> row = new TableRow<>();
+            row.setOnDragDetected(event -> {
+                if (! row.isEmpty()) {
+                    Integer index = row.getIndex();
+                    Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
+                    db.setDragView(row.snapshot(null, null));
+                    ClipboardContent cc = new ClipboardContent();
+                    cc.put(SERIALIZED_MIME_TYPE, index);
+                    db.setContent(cc);
+                    event.consume();
+                }
+            });
+
+            row.setOnDragOver(event -> {
+                Dragboard db = event.getDragboard();
+                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
+                    if (row.getIndex() != ((Integer)db.getContent(SERIALIZED_MIME_TYPE)).intValue()) {
+                        event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                        event.consume();
+                    }
+                }
+            });
+
+            row.setOnDragDropped(event -> {
+                Dragboard db = event.getDragboard();
+                if (db.hasContent(SERIALIZED_MIME_TYPE)) {
+                    int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
+                    Departmens draggedPerson = tableViewDepartmens.getItems().remove(draggedIndex);
+
+                    int dropIndex ;
+
+                    if (row.isEmpty()) {
+                        dropIndex = tableViewDepartmens.getItems().size() ;
+                    } else {
+                        dropIndex = row.getIndex();
+                    }
+
+                    tableViewDepartmens.getItems().add(dropIndex, draggedPerson);
+
+                    event.setDropCompleted(true);
+                    tableViewDepartmens.getSelectionModel().select(dropIndex);
+                    event.consume();
+                }
+            });
+
+            return row ;
+        });
+
+
+
+
         nameDepartmentColumn.setCellValueFactory(cellData -> cellData.getValue().nameDepartmentProperty());
         FIO.setCellValueFactory(cellData -> cellData.getValue().FIOProperty());
         position.setCellValueFactory(cellData -> cellData.getValue().positionProperty());
         birthday.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         phone.setCellValueFactory(cellData -> cellData.getValue().phoneProperty());
         mobilePhone.setCellValueFactory(cellData -> cellData.getValue().mobilePhoneProperty());
+        comments.setCellValueFactory(cellData -> cellData.getValue().commentsProperty());
 
         //////
 
@@ -135,6 +259,7 @@ public class PersonOverview {
         birthdayb.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         phoneb.setCellValueFactory(cellData -> cellData.getValue().phoneProperty());
         mobilePhoneb.setCellValueFactory(cellData -> cellData.getValue().mobilePhoneProperty());
+        commentsb.setCellValueFactory(cellData -> cellData.getValue().commentsProperty());
 
 
 
@@ -143,8 +268,7 @@ public class PersonOverview {
         birthdayc.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         phonec.setCellValueFactory(cellData -> cellData.getValue().phoneProperty());
         mobilePhonec.setCellValueFactory(cellData -> cellData.getValue().mobilePhoneProperty());
-
-
+        commentsc.setCellValueFactory(cellData -> cellData.getValue().commentsProperty());
 
 
 
@@ -153,6 +277,8 @@ public class PersonOverview {
         birthdays.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         phones.setCellValueFactory(cellData -> cellData.getValue().phoneProperty());
         mobilePhones.setCellValueFactory(cellData -> cellData.getValue().mobilePhoneProperty());
+        commentss.setCellValueFactory(cellData -> cellData.getValue().commentsProperty());
+
 
         FilteredList<Departmens.Person> filteredData = new FilteredList<>(masterData, p -> true);
 
@@ -209,8 +335,8 @@ public class PersonOverview {
         for (int i = 0; i < tempDepartamens.size(); i++) {
             for (int j = 0; j < tempDepartamens.get(i).getContactList().size(); j++) {
                 ////
-                if (tempDepartamens.get(i).getContactList().get(j).getDate().getMonth().equals(LocalDate.now().getMonth())) {
-                    if (tempDepartamens.get(i).getContactList().get(j).getDate().getDayOfMonth() < LocalDate.now().getDayOfMonth()) {
+                if (tempDepartamens.get(i).getContactList().get(j).getDate().getMonth().getValue() == LocalDate.now().getMonth().getValue()) {
+                    /*if (tempDepartamens.get(i).getContactList().get(j).getDate().getDayOfMonth() < LocalDate.now().getDayOfMonth()) {
                         if ((tempDepartamens.get(i).getContactList().get(j).getDate().getDayOfMonth() - LocalDate.now().getDayOfMonth()) <= 0
                                 && (tempDepartamens.get(i).getContactList().get(j).getDate().getDayOfMonth() - LocalDate.now().getDayOfMonth()) <= -7) {
                             tempList.add(tempDepartamens.get(i).getContactList().get(j));
@@ -221,6 +347,9 @@ public class PersonOverview {
                         if (tempDate <= 0 && tempDate <= -7) {
                             tempList.add(tempDepartamens.get(i).getContactList().get(j));
                         }
+                    }*/
+                    if (tempDepartamens.get(i).getContactList().get(j).getDate().getDayOfMonth() == LocalDate.now().getDayOfMonth()) {
+                        tempList.add(tempDepartamens.get(i).getContactList().get(j));
                     }
                 }
 
