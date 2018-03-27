@@ -7,14 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6e316cf-dfd6-41b9-9875-1f83fa2d2fb6" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/address/view/style.css" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/address/model/Departmens.java" afterPath="$PROJECT_DIR$/src/address/model/Departmens.java" />
-      <change beforePath="$PROJECT_DIR$/src/address/view/PersonEditDialog.java" afterPath="$PROJECT_DIR$/src/address/view/PersonEditDialog.java" />
-      <change beforePath="$PROJECT_DIR$/src/address/view/PersonOverview.fxml" afterPath="$PROJECT_DIR$/src/address/view/PersonOverview.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/address/view/PersonOverview.java" afterPath="$PROJECT_DIR$/src/address/view/PersonOverview.java" />
-      <change beforePath="$PROJECT_DIR$/src/address/view/RootLayout.fxml" afterPath="$PROJECT_DIR$/src/address/view/RootLayout.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/address/view/RootLayout.java" afterPath="$PROJECT_DIR$/src/address/view/RootLayout.java" />
+      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -95,11 +89,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addressbook2.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="addressbook2.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/out/artifacts/addressbook2/addressbook2.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
               <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -160,6 +164,7 @@
         <option value="$PROJECT_DIR$/src/address/view/RootLayout.java" />
         <option value="$PROJECT_DIR$/src/address/view/style.css" />
         <option value="$PROJECT_DIR$/src/address/view/PersonOverview.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -229,6 +234,13 @@
               <item name="addressbook2" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="address" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="addressbook2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="addressbook2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -405,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1521654177580</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Test project PhoneBook">
+      <created>1522165534477</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1522165534477</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -442,6 +461,7 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.md" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -452,7 +472,8 @@
     <MESSAGE value="add Birthday in Main" />
     <MESSAGE value="add Search functions" />
     <MESSAGE value="add drag n drop" />
-    <option name="LAST_COMMIT_MESSAGE" value="add drag n drop" />
+    <MESSAGE value="Test project PhoneBook" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test project PhoneBook" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -461,16 +482,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/address/view/PersonOverview.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="59" column="85" lean-forward="false" selection-start-line="59" selection-start-column="85" selection-end-line="59" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/address/model/PersonListWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -545,6 +556,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
           <caret line="59" column="85" lean-forward="false" selection-start-line="59" selection-start-column="85" selection-end-line="59" selection-end-column="85" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -605,6 +617,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
           <caret line="59" column="85" lean-forward="false" selection-start-line="59" selection-start-column="56" selection-end-line="59" selection-end-column="85" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -786,6 +799,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="31" column="59" lean-forward="false" selection-start-line="31" selection-start-column="59" selection-end-line="31" selection-end-column="59" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -796,6 +810,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -806,6 +821,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1020">
           <caret line="60" column="85" lean-forward="false" selection-start-line="60" selection-start-column="85" selection-end-line="60" selection-end-column="85" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -901,6 +917,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/out/artifacts/addressbook2/addressbook2.jnlp" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
