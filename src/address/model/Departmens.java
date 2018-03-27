@@ -48,9 +48,6 @@ public class Departmens {
     public Departmens(String nameDepartment) {
         this.nameDepartment = new SimpleStringProperty(nameDepartment);
 
-        for (int i = 0; i < 200; i++) {
-            contactList.add(new Person());
-        }
         /*contactList.add(new Person());
         contactList.add(new Person());
         contactList.add(new Person());
@@ -83,11 +80,11 @@ public class Departmens {
         private final StringProperty comments;
 
         public Person() {
-            this.FIO = new SimpleStringProperty("Human");
-            this.position = new SimpleStringProperty("Boss");
-            Date = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
-            this.phone = new SimpleStringProperty("777");
-            this.mobilePhone = new SimpleStringProperty("89997776666");
+            this.FIO = new SimpleStringProperty("");
+            this.position = new SimpleStringProperty("");
+            Date = new SimpleObjectProperty<LocalDate>(LocalDate.of(1980, 11, 24));
+            this.phone = new SimpleStringProperty("");
+            this.mobilePhone = new SimpleStringProperty("");
             this.comments = new SimpleStringProperty("");
         }
 

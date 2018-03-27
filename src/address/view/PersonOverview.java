@@ -307,7 +307,7 @@ public class PersonOverview {
 
         SortedList<Departmens.Person> sortedData = new SortedList<>(filteredData);
         //sortedData.comparatorProperty().bind(tableViewSearch.comparatorProperty());
-        tableViewSearch.setItems(filteredData);
+        tableViewSearch.setItems(sortedData);
 
 
         tableViewDepartmens.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Departmens>() {

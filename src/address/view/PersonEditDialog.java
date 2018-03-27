@@ -29,7 +29,7 @@ public class PersonEditDialog {
     private void initialize() {
         textFieldFIO.setPromptText("Пример: Иванов Иван Иванович");
         textFieldPosition.setPromptText("Пример: Начальник");
-        textFieldBirthday.setPromptText("Пример: 1990-11-24");
+        textFieldBirthday.setPromptText("Пример: 24-11-1990");
         textFieldPhone.setPromptText("Пример: 777");
         textFieldMobilePhone.setPromptText("Пример: 8-981-456-77-77 или 89814567777");
         comments.setPromptText("Пример: любой текст");

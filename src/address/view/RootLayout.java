@@ -39,6 +39,7 @@ public class RootLayout {
     @FXML
     private void handleNew() {
         mainApp.getDepartmens().clear();
+        //mainApp.getContacts().clear();
         mainApp.setPersonFilePath(null);
     }
 
@@ -108,7 +109,7 @@ public class RootLayout {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Телефонный справочник");
         alert.setHeaderText("О программе");
-        alert.setContentText("Автора: Томачинский Артем Олегович");
+        alert.setContentText("Автор: Томачинский Артем Олегович");
 
         alert.showAndWait();
     }
